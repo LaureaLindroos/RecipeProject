@@ -1,0 +1,63 @@
+[
+{
+  "name": "Omelett",
+  "portions": 4,
+  "instructions": [
+    "Knäck äggen",
+    "Krydda äggsmeten med salt m.m.",
+    "Vispa äggen",
+    "Stek smeten",
+    "Lägg på tallrik"
+  ],
+  "ingredients": [
+    {
+      "name": "ägg",
+      "units": 6,
+      "measuringUnit" : "st",
+      "unitEquivalentInGrams": 60
+    }
+  ],
+  "urlToImg" : "/images/beautiful-omelet.jpg"
+},
+{
+  "name": "pannkaka",
+  "portions": 4,
+  "instructions": [
+    "Blanda mjöl och salt i en bunke. Vispa i hälften av mjölken och vispa till en slät smet. Vispa i resten av mjölken och äggen.",
+    "Smält smöret i stekpannan och vispa ner i smeten. Stek tunna pannkakor av smeten i en stek- eller pannkakspanna.",
+    "Servera med exempelvis sylt, bär eller frukt"
+  ],
+  "ingredients": [
+    {
+      "name": "vetemjöl",
+      "units": 2.5,
+      "measuringUnit": "dl",
+      "unitEquivalentInGrams": 60
+    },
+    {
+      "name": "salt",
+      "units": 0.5,
+      "measuringUnit": "tsk",
+      "unitEquivalentInGrams": 6
+    }, 
+    {
+      "name": "mjölk",
+      "units": 6,
+      "measuringUnit": "dl",
+      "unitequivalentInGrams":100
+    },
+    {
+      "name": "ägg",
+      "units": 3,
+      "measuringUnit": "st",
+      "unitEquivalentInGrams": 60
+    },
+    {
+      "name": "smör",
+      "units": 3,
+      "measuringUnit": "msk",
+      "unitEquivalentInGrams": 15
+    }
+  ]
+}
+]

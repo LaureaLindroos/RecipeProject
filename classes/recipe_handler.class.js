@@ -1,28 +1,14 @@
-// require promisemaker, that converts modules
-// with callbacks based methods to modules
-// with methods that return promises
-const pm = require("promisemaker");
-
-// require the built in in module path
-// that helps us buld file paths
-const path = require('path');
-
-// require the built in module fs
-// and convert it with promisemaker to 
-// return promises instead of callbacks
-const fs = pm(
-  require('fs'), 
-  // Important: Never reject promises
-  // - instead send the error as a resolve
-  // (this is a promisemaker setting)
-  { rejectOnErrors: false }
-);
-
-module.exports = class Recipe {
-
-  // Note: Static methods
-  // are methods common for the whole class
-  // (not instance specific)
+const recipeIngredient = require('./ingredient.class')
+module.exports = class RecipeHandler {
+  
+  constructor(props){
+      
+      
+      Object.assign(this, props);
+    }
+  
+    async writeToFile(){
+  }
 
   static createFilePath(recipeName){
     // sanitize the recipename so that it can only
@@ -45,17 +31,6 @@ module.exports = class Recipe {
     // we'll convert to a Recipe instance
     let data = JSON.parse(contents);
     return new Recipe(data);
-  }
-
-  constructor(props){
-    // Move all properties in the object props
-    // to the instance we are creating
-    
-    // Please Note: Right now we are not
-    // checking that any specific 
-    // properties exists... we probably should ;)
-    
-    Object.assign(this, props);
   }
 
   async writeToFile(){

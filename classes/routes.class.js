@@ -1,8 +1,7 @@
-// We have dependencies to other modules/classes
-const Recipe = require('./recipe.class');
 
-// probably singleton
-// sets all Express routes
+const Recipe = require('./recipe_handler.class');
+
+
 module.exports = class Routes {
 
   constructor(app, ingredients){
@@ -12,31 +11,18 @@ module.exports = class Routes {
   }
 
   setRoutes(){
-    // set some routes
-    // we might split this method into several later
-
-    // should we have a route that returns ingredients by id?
-    // then it should be app.get('/ingredients/1)
-    // we coud use .Nummer as an equivalent of id in a DB...
-
-    // should we return all ingredients if we just call
-    // app.get('/ingredients')
-    // in that case should we return them in a short form
-    // without all their properties?
-
-    this.app.get(
+//how to search through ingredients
+   /*  this.app.get(
       '/autocomplete-ingredient-name/:startOfName',
       (req, res) => {
-        // req.params will include properties with the names
-        // of params I have defined with :paramName in my route/url
+        
         let start = req.params.startOfName.toLowerCase();
-        // require at least two characters
+        
         if(start.length < 2){
           res.json({error: 'Please provide at least two characters...'});
           return;
         }
-        // filter ingredients so that only those with a Namn
-        // matching start are left, then map from obj to obj.Namn
+        
         let result = this.ingredients.filter(
           ingredient => ingredient.Namn.toLowerCase().indexOf(start) == 0
         ).map(
@@ -44,7 +30,49 @@ module.exports = class Routes {
         );
         res.json(result);
       }
+    ); */
+    this.app.get(
+      '/autocomplete-recipe-name/:startOfName',
+      (req, res) => {
+        let value = req.params.startOfName.toLowerCase();
+
+        if(value.lenght < 2) {
+          res.json({error: 'please provide at least 2 characters.'});
+          return;
+
+        }
+        let result =this.recipes.filter(
+          recipe = recipe.Namn.toLowerCase().indexOf(start) == 0
+        ).map(
+          recipe => recipe.Namn
+        );
+        res.json(result);
+      }
     );
+
+        this.app.get(
+          '/recipes/:partOfRecipeName',
+          async (req, res) => {
+            let value = req.params.partOfRecipeName.toLowerCase();
+    
+            if (value.length < 2) {
+              res.json({ error: 'Please provide at least two characters...' });
+              return;
+            }
+    
+            let recipes = require('../json/recipe.json') || [];
+            
+            recipes = recipes.filter((recipe) =>{
+              return recipe.name.toLowerCase().includes(value)
+            })
+            .map((recipe)=>{
+              return recipe.name
+            });
+    
+            res.json(recipes);
+          }
+        );
+      
 
     this.app.get(
       '/recipe-by-name/:name', 
@@ -64,5 +92,5 @@ module.exports = class Routes {
     );
 
   }
-
 }
+
