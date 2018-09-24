@@ -1,0 +1,20 @@
+{
+  "name": "Omelett",
+  "persons": 4,
+  "instructions": [
+    "Knäck äggen",
+    "Krydda äggsmeten med salt m.m.",
+    "Vispa äggen",
+    "Stek smeten",
+    "Lägg på tallrik"
+  ],
+  "ingredients": [
+    {
+      "name": "ägg",
+      "units": 6,
+      "measuringUnit" : "st",
+      "unitEquivalentInGrams": 60
+    }
+  ],
+  "urlToImg" : "/images/beautiful-omelet.jpg"
+}
