@@ -4,6 +4,7 @@
     getRecipes(searchValue);
 })
 function getRecipes(searchValue){
+    
     $.get('http://localhost:3000/recipes/' + searchValue, (data) => {
         $('#search-result').empty();
         data.forEach(writeRecipes);
@@ -12,12 +13,17 @@ function getRecipes(searchValue){
     
 }
 function writeRecipes(recipe) {
+
     
     $('#search-result').append(`<h4> ${recipe.name} </h4>`);
     $('#search-result').append(`<h5> ${recipe.instructions}</h5>`);
-    $('#search-result').append(`<h5> ${recipe.ingredients}</h5>`);
+    let ingredients;
+    for(let i of recipe.ingredients){
+        $('#search-result').append(`<h5> ${i.name}</h5>`);
+    }
 
-} 
+}
+
 /* $('#search-button').on('click', async function(){
     let searchinput = $('#search-value').val().toLowerCase();
     recipes = await $.getJSON('/recipe.json').catch(console.err);
