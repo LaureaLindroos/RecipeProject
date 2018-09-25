@@ -4,13 +4,12 @@ $('#search-button').click(()  =>{
 })
 function getRecipes(searchValue){
     $.get('http://localhost:3000/recipes/' + searchValue, (data) => {
-        data.array.forEach(element => {
-            
-        });(addRecipes);
+        $('#search-result').empty();
+        data.forEach(addRecipes);
             
     });
 }
-function addRecipes(recipeName) {
-    $('#search-result').empty();
-    $('#search-result').append(`<h4> ${recipeName} </h4>`);
+function addRecipes(recipe) {
+    
+    $('#search-result').append(`<h4> ${recipe.name} </h4>`, `<p> ${recipe.description}</p>`);
 }

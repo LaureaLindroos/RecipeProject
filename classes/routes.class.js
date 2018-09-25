@@ -65,9 +65,6 @@ module.exports = class Routes {
             recipes = recipes.filter((recipe) =>{
               return recipe.name.toLowerCase().includes(value)
             })
-            .map((recipe)=>{
-              return recipe.name
-            });
     
             res.json(recipes);
           }

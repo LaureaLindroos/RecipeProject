@@ -1,4 +1,4 @@
-const recipeIngredient = require('./ingredient.class')
+/* const recipeIngredient = require('./ingredient.class')
 module.exports = class RecipeHandler {
   
   constructor(props){
@@ -33,21 +33,6 @@ module.exports = class RecipeHandler {
     return new Recipe(data);
   }
 
-  async writeToFile(){
-    let filePath =  Recipe.createFilePath(this.name);
-    // check if the file exists
-    let fileExists = !((await fs.stat(filePath)) instanceof Error);
-    // if the file exists - return an error
-    if(fileExists){
-      return {error: 'A recipe with that name already exists! Cannot create the recipe!'}
-    }
-    await fs.writeFile(
-      filePath,
-      JSON.stringify(this, null, '  '),
-      'utf-8'
-    );
-    // assume it worked
-    return {success: 'Recipe created!'}
-  }
+  
 
-}
+} */
