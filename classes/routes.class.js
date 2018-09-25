@@ -12,7 +12,7 @@ module.exports = class Routes {
 
   setRoutes(){
 //how to search through ingredients
-   /*  this.app.get(
+     this.app.get(
       '/autocomplete-ingredient-name/:startOfName',
       (req, res) => {
         
@@ -24,13 +24,14 @@ module.exports = class Routes {
         }
         
         let result = this.ingredients.filter(
-          ingredient => ingredient.Namn.toLowerCase().indexOf(start) == 0
+          ingredient => ingredient.name.toLowerCase().indexOf(start) == 0
         ).map(
-          ingredient => ingredient.Namn
+          ingredient => ingredient.name
         );
         res.json(result);
       }
-    ); */
+    ); 
+    //Searching through recipes
     this.app.get(
       '/autocomplete-recipe-name/:startOfName',
       (req, res) => {
@@ -44,7 +45,7 @@ module.exports = class Routes {
         let result =this.recipes.filter(
           recipe = recipe.Namn.toLowerCase().indexOf(start) == 0
         ).map(
-          recipe => recipe.Namn
+          recipe => recipe.name
         );
         res.json(result);
       }
@@ -74,7 +75,7 @@ module.exports = class Routes {
     this.app.get(
       '/recipe-by-name/:name', 
       async (req, res) => {
-        let recipe = await Recipe.readFromFile(req.params.name)
+        let recipe = await RecipeHandler.readFromFile(req.params.name)
         res.json(recipe);
       }
     );
@@ -82,12 +83,26 @@ module.exports = class Routes {
     this.app.post(
       '/recipe', 
       async (req, res) => {
-        let recipe = new Recipe(req.body);
+        let recipe = new RecipeHandler(req.body);
         let result = await recipe.writeToFile();
         res.json(result);
       }
     );
-
+    this.app.get(
+      '/recipe-ingredient-name/:ingredientName',
+      async (req, res) => {
+      let result = this.ingredients.filter(
+        ingredient => ingredient.name.toLowerCase().indexOf(start) == 0
+      ).map(
+        ingredient => ingredient.name
+      );
+      res.json(result);
+    
+    }
+  )
+  
+  
   }
 }
+
 
