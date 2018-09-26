@@ -1,3 +1,5 @@
+//började på denna men ej säker på om jag kommer använda den
+
 class Nutrition {
         constructor(){
             this.energiKcal = 0;

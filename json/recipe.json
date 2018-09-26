@@ -59,5 +59,31 @@
       "unitEquivalentInGrams": 15
     }
   ]
+},
+{
+  "name": "Pasta med smör",
+  "persons": 2,
+  "instructions": [
+      "Häll vatten i en kastrull och koka upp på full värme.",
+      "När vattnet kokar häll i pastan, följ minutanvisningarna på förpackningen.",
+      "Fiska upp en bit pasta och kolla så att den är klar, ha gärna kvar lite tuggmotstånd.",
+      "Använd en sked och rör ner smör."
+  ],
+  "ingredients": [
+      {
+          "name": "Pasta",
+          "units": 4,
+          "measuringUnit": "dl",
+          "unitEquivalentInGrams": 350
+      },
+      {
+          "name": "smör",
+          "units": 3,
+          "measuringUnit": "tsk",
+          "unitEquivalentInGrams": 50
+      }
+  ],
+  "urlToImg": "/images/beautiful-pasta.jpg",
+  "category": "Middag"
 }
 ]

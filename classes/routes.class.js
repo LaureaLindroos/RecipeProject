@@ -88,18 +88,7 @@ module.exports = class Routes {
         res.json(result);
       }
     );
-    this.app.get(
-      '/recipe-ingredient-name/:ingredientName',
-      async (req, res) => {
-      let result = this.ingredients.filter(
-        ingredient => ingredient.name.toLowerCase().indexOf(start) == 0
-      ).map(
-        ingredient => ingredient.name
-      );
-      res.json(result);
     
-    }
-  )
   
   
   }
