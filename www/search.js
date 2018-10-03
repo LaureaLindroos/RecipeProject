@@ -12,6 +12,14 @@ $(document).keypress( function(e){
         getRecipes(searchValue);
     }
 })
+$('#search-value').keyup(function () {
+    $('#result').html('');
+    $('#resultAc').empty();
+    let searchValue = $('#search-value').val();
+    if (searchValue.length > 1) {
+        getAutocomplete(searchValue);
+    }
+})
 //Fetch data from JSON-file
 function getRecipes(searchValue){
     
@@ -21,6 +29,25 @@ function getRecipes(searchValue){
             
     });
     
+}
+//Autocomplete
+$("#resultAc").click(function (event) {
+    var target = $(event.target);
+    if (target.is("li")) {
+        $('#search-value').val(target.text());
+        getRecipes(target.text());
+    }
+});
+
+function getAutocomplete(searchValue) {
+    $.get('http://localhost:3000/recipes/' + searchValue, (data) => {
+        data.forEach(listAc);
+    });
+
+}
+
+function listAc(recipe) {
+    $('#resultAc').append(`<li class="list-group-item">${recipe.name}</li> `);
 }
 //Display data on page
 function writeRecipes(recipe) {
