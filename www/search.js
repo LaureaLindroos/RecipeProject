@@ -5,6 +5,13 @@
     let searchValue = $('#search-value').val();
     getRecipes(searchValue);
 })
+$(document).keypress( function(e){
+    let searchValue = $('#search-value').val();
+    if(e.key === "Enter"){
+        console.log("You've pressed the enter key!");
+        getRecipes(searchValue);
+    }
+})
 //Fetch data from JSON-file
 function getRecipes(searchValue){
     

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   </head>
   <body>
+    <section id="navbar">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <a class="navbar-brand" href="#">Foodable</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,9 +28,9 @@
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="#">Breakfast</a>
+                        <a class="dropdown-item" href="#">Lunch</a>
                         <a class="dropdown-item" href="#">Dinner</a>
-                        <a class="dropdown-item" href="#">Dessert</a>
-                        <a class="dropdown-item" href="#">Snack</a>
+                        <a class="dropdown-item" href="#">Snack/Dessert</a>
                       </div>
                     </li>
                 </div>
@@ -41,22 +42,147 @@
             </form>
           </div>
         </nav>
-    <h1>Lägg till recept</h1>
-    <form class="add-recipe">
-        <p>Namn på recept:</p>
-        <input id="recipe-name" type="text" name="name-of-recipe">
-        <p>Ingredienser:</p>
-        <input id="ingredient-name" type="text" name="ingrents">
-        <p>Beskrivning:</p>
-        <textarea id="toDo" type="text" name="toDo" placeholder="Beskrivning steg för steg:"></textarea>
-        <input id="toDo-button" type="button" value="spara recept">
+        </section>
 
-    </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-    <script src="add_recipe.js"></script>
-  </body>
-</html>
+        <div id="new-recipe-box" class="container">
+            <h2>Skapa recept</h2>
+        
+            <main>
+        
+              <form id="category-form">
+                <div class="input-group mb-3">
+                  <label for="recipe-category" class="sr-only">Kategori</label>
+                  <select id="recipe-category" type="text" name="recipe_category" class="form-control">
+                    <option value="0" hidden>Välj kategori...</option>
+                    <option value="Frukost">Frukost</option>
+                    <option value="Middag">Middag</option>
+                    <option value="Efterrätt">Efterrätt</option>
+                    <option value="Student">Student</option>
+                  </select>
+                  <div class="input-group-prepend">
+                    <button id="add_category" type="submit" class="btn btn-outline-secondary">Lägg till</button>
+                  </div>
+                </div>
+              </form>
+        
+              <form id="portions-form">
+                <div class="input-group mb-3">
+                  <label for="recipe-portions" class="sr-only">Portioner</label>
+                  <input input id="recipe-portions" type="text" name="recipe_portions" class="form-control clear-input"
+                    placeholder="Antal portioner">
+                  <div class="input-group-prepend">
+                    <button id="add_portions" type="submit" class="btn btn-outline-secondary">Lägg till</button>
+                  </div>
+                </div>
+              </form>
+        
+              <form id="name-form">
+                <div class="input-group mb-3">
+                  <label for="name" class="sr-only">Namn</label>
+                  <input input id="recipe-name" type="text" name="recipe_name" class="form-control clear-input" placeholder="Namn">
+                  <div class="input-group-prepend">
+                    <button id="add_name" type="submit" class="btn btn-outline-secondary">Lägg till</button>
+                  </div>
+                </div>
+              </form>
+        
+              <form id="instruction-form">
+                <div class="input-group mb-3">
+                  <label for="recipe-instruction" class="sr-only">Instruktioner</label>
+                  <input input id="recipe-instruction" type="text" name="recipe_instruction" class="form-control clear-input"
+                    placeholder="Instruktion">
+                  <div class="input-group-prepend">
+                    <button id="add_instruction" type="submit" class="btn btn-outline-secondary">Lägg till</button>
+                  </div>
+                </div>
+              </form>
+        
+              <form id="image-form">
+                <div class="input-group mb-3">
+                  <label for="recipe-img" class="sr-only">Bild</label>
+                  <input input id="recipe-image" type="text" name="recipe_image" class="form-control clear-input" placeholder="Ladda upp bild">
+                  <div class="input-group-prepend">
+                    <button id="add_image" type="submit" class="btn btn-outline-secondary">Lägg till</button>
+                  </div>
+                </div>
+              </form>
+        
+              <form id="ingredient-form" class="form-inline">
+                <div class="input-group mb-3">
+                  <label for="ingredient-name" class="sr-only">Ingrediens</label>
+                  <input input id="ingredient-name" type="text" name="ingredient_name" class="form-control clear-input"
+                    placeholder="Ingrediens">
+                </div>
+                <div class="input-group mb-3">
+                  <label for="units" class="sr-only">Mängd</label>
+                  <input input id="units" type="text" name="ingredient_units" class="form-control clear-input" placeholder="Mängd">
+                </div>
+                <div class="input-group mb-3">
+                  <label for="measure-unit" class="sr-only">Måttenhet</label>
+                  <select id="measure-unit" type="text" name="ingredient_measuring_unit" class="form-control">
+                    <option value="0" hidden>Välj enhet...</option>
+                    <option value="dl">dl</option>
+                    <option value="msk">cl</option>
+                    <option value="msk">ml</option>
+                    <option value="msk">msk</option>
+                    <option value="tsk">tsk</option>
+                    <option value="krm">krm</option>
+                    <option value="g">g</option>
+                    <option value="st">st</option>
+                    <option value="kg">kg</option>
+                    <option value="l">l</option>
+                  </select>
+                </div>
+                <div class="input-group mb-3">
+                  <label for="grams" class="sr-only">Gram</label>
+                  <input input id="grams" type="text" name="ingredient_grams" class="form-control clear-input" placeholder="Gram">
+                </div>
+                <div class="input-group-prepend">
+                  <button id="add_ingredient" type="submit" class="btn btn-outline-secondary">Lägg till</button>
+                </div>
+              </form>
+        
+              <section id="display-ingredients"></section>
+          </div>
+        
+          </main>
+        
+          <div id="preview" class="container">
+            <h2>Förhandsvisning av ditt recept</h2>
+        
+            <h5>Kategori</h5>
+            <div id="preview-category" class="empty-preview"></div>
+        
+            <h5>Antal portioner</h5>
+            <div id="preview-portions" class="empty-preview"></div>
+        
+            <h5>Namn</h5>
+            <div id="preview-name" class="empty-preview"></div>
+        
+            <h5>Ingredienser</h5>
+            <ul id="preview-ingredient" class="empty-preview"></ul>
+        
+            <h5>Bild länk</h5>
+            <div id="preview-image" class="empty-preview"></div>
+        
+            <h5>Instruktioner</h5>
+            <ol id="preview-instruction" class="empty-preview"></ol>
+        
+            <button id="submit" type="submit" class="btn btn-default">Submit Recipe</button>
+          </div>
+        
+          <div class="container">
+            <footer>
+              
+            </footer>
+          </div>
+          <script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+          <script src="/js/add_recipe.js"></script>
+          <script src="https s://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        </body>
+        
+        </html>
