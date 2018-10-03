@@ -2,6 +2,7 @@
 {
   "name": "Omelett",
   "portions": 4,
+  "category":"Frukost",
   "instructions": [
     "Knäck äggen",
     "Krydda äggsmeten med salt m.m.",
@@ -22,6 +23,7 @@
 {
   "name": "pannkaka",
   "portions": 4,
+  "category":"Frukost",
   "instructions": [
     "Blanda mjöl och salt i en bunke. Vispa i hälften av mjölken och vispa till en slät smet. Vispa i resten av mjölken och äggen.",
     "Smält smöret i stekpannan och vispa ner i smeten. Stek tunna pannkakor av smeten i en stek- eller pannkakspanna.",
@@ -58,11 +60,13 @@
       "measuringUnit": "msk",
       "unitEquivalentInGrams": 15
     }
-  ]
+  ],
+  "urlToImg": "/images/beautiful-pasta.jpg"
 },
 {
   "name": "Pasta med smör",
-  "persons": 2,
+  "portions": 2,
+  "category":"Guilty Pleasure",
   "instructions": [
       "Häll vatten i en kastrull och koka upp på full värme.",
       "När vattnet kokar häll i pastan, följ minutanvisningarna på förpackningen.",
@@ -83,7 +87,6 @@
           "unitEquivalentInGrams": 50
       }
   ],
-  "urlToImg": "/images/beautiful-pasta.jpg",
-  "category": "Middag"
+  "urlToImg": "/images/beautiful-pasta.jpg"
 }
 ]

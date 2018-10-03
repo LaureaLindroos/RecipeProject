@@ -31,6 +31,50 @@ module.exports = class Routes {
         res.json(result);
       }
     ); 
+    //Filtering recipe
+    this.app.get(
+      '/recipes-by-category/:category',
+      async (req, res) => {
+        let valCategory = req.params.category.toLowerCase();
+        console.log(valCategory);
+        let categories = require('../json/recipe.json') || [];
+
+        categories = categories.filter((recipe) => {
+          console.log(recipe.category);
+          if (recipe.category.toLowerCase() == valCategory) {
+            console.log("added to list");
+            return recipe.name.toLowerCase();
+          }
+        })
+        res.json(categories);
+      }
+    );
+  
+
+
+
+   /* this.app.get(
+      '/recipes-by-category/:category',
+      (req, res) => {
+        
+        let valCategory = req.params.category.toLowerCase();
+        let cat = require('../json/recipe.json') || [];
+        
+        //categories.category.forEach((recipe) => {
+          console.log(cat.category);
+          categories = cat.category.filter(function (e){
+            if(e.toLowerCase().includes(valCategory)){
+              return e.toLowerCase();
+            }
+          })
+          let result = categories.category.filter((cat) => {
+            return cat.toLowerCase().includes(valCategory)
+            }) 
+        
+        
+        res.json(categories);
+      }*/
+    
     //Searching through recipes
     this.app.get(
       '/autocomplete-recipe-name/:startOfName',
