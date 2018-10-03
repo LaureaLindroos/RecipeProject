@@ -1,11 +1,7 @@
-// ########################################## |
-// #            RECIPE                      # |
-// ########################################## v
 
-
-
-$(document).on('click', '#luke', function () {
-    console.log('NOOOOOOOOOOOOOOOOOoooooooohhhhh......!!!!!');
+//For recipe
+$(document).on('click', '#submit', function () {
+    console.log('Submitting recipe');
     $('.empty-preview').empty()
     $.post('http://localhost:3000/recipes/', (data) => {
 
@@ -57,7 +53,7 @@ $('#add_category').on('click', () => {
             $('#recipe-category').prop('selectedIndex', 0);
             $('#preview-category').empty()
             if (data) {
-                $('#preview-category').append($('<p>' + data + '</p>'));
+                $('#preview-category').append($(`<p> + ${category.name} + </p>`));
             }
         });
 })
@@ -178,11 +174,8 @@ $('#add_ingredient').on('click', () => {
 })
 
 
-
-// ########################################## |
-// #            INGREDIENT                  # |
-// ########################################## v
-
+//For
+//Ingredients
 $('#ingredient-name').on('keyup', () => {
     let searchValue = $('#ingredient-name').val();
     getIngredients(searchValue);

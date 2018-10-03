@@ -24,7 +24,7 @@
     getRecipeList(searchValue);
     
     }
-});  */
+});*/  
 function autoCompleteSearch() {
     let list = RecipeHandler.getRecipeList();
     $('#search-value').autocomplete({
@@ -32,25 +32,12 @@ function autoCompleteSearch() {
     });
 }
 
-$(document).ready(function () {
-    var data;
-    $.ajax({
-        dataType: "json",
-        url: '/recipes',
-        data: data,
-        success: function (data) {
-            // begin accessing JSON data here
-            console.log(data[0].name);
-        }
-    });
-});
-
 
 function getRecipes(searchValue){
     
     $.get('http://localhost:3000/recipes/' + searchValue, (data) => {
         $('#search-result').empty();
-        data.forEach(writeRecipes);
+        data.Foreach(writeRecipes);
         $('#resultAc').empty();
             
     });
