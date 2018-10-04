@@ -1,4 +1,4 @@
-class AddRecipe {
+class AddRecipeData {
     constructor(name, portions, instructions, ingredients, url) {
         let name = name;
         let portions = portions;

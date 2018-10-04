@@ -1,22 +1,21 @@
+const Recipe = require('./recipe_handler.class');
+
 const fs = require('fs');
 const path = require('path');
-const recipePath = path.join(__dirname, '../json/recipes.json');
+const recipePath = path.join(__dirname, '../json/recipe.json');
 let recipes = require(recipePath);
 
 module.exports = class Routes {
 
 
 
-  constructor(app, ingredientData) {
+  constructor(app, ingredients) {
     this.app = app;
-    this.ingredientData = ingredientData;
-    this.recipeObj = {
-      ingredients: [],
-      instructions: [],
-      nutrition: []
-    };
+    this.ingredients = ingredients;
     this.setRoutes();
   }
+
+  
 
   setRoutes(){
 //how to search through ingredients
@@ -147,7 +146,8 @@ module.exports = class Routes {
           );
         }
       }
-      this.app.post(
+
+      /* this.app.post(
         '/add-name', (req, res) => {
         console.log(req.body);
         let newName = req.body.recipe_name;
@@ -156,10 +156,22 @@ module.exports = class Routes {
         this.recipeObj.name = newName;
   
         res.json(this.recipeObj.name);
-      });
+      }); */
+      //find nutrition
+    /* this.app.get(
+      '/ingredients/:ingredient',
+      (req, res) => {
+
+        let ingredients = req.params.ingredient.toLowerCase();
+
+        let ingredientDb = require('../json/livsmedelsdata.json') || [];
+
+        let result = ingredientDb.find((ing) => ing.Namn.toLowerCase()===ingredients);
+
+        res.json(result);
+
+      }
+    ); */
         
           
         
-        
-        
-  
