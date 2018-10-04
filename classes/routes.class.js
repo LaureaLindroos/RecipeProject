@@ -1,3 +1,7 @@
+const fs = require('fs');
+const path = require('path');
+const recipePath = path.join(__dirname, '../json/recipes.json');
+let recipes = require(recipePath);
 
 module.exports = class Routes {
 
@@ -122,27 +126,7 @@ module.exports = class Routes {
     //-------------------------------
     //to get single recipe from list
     //-------------------------------
-    /* this.app.get(
-      '/recipe-list/:name',
-      
-         async (req, res) => {
-          let value = req.params.name.toLowerCase();
-          if (value.length === 0) {
-            res.json({ error: 'No recipe name' });
-            return;
-          }
-          let recipes = require('../json/recipe.json')
-          //console.log(recipes);
-          let recipe = recipes.find((recipe) => {
-
-            recipe.name.toLowerCase().includes(value);
-          });
-
-          res.json(recipe); 
-          console.log(recipe);//why is this undefined?
-          
-          });
-        } */
+    
         this.app.get(
           '/recipe-list/:name',
           
@@ -163,16 +147,19 @@ module.exports = class Routes {
           );
         }
       }
+      this.app.post(
+        '/add-name', (req, res) => {
+        console.log(req.body);
+        let newName = req.body.recipe_name;
+  
+        console.log('New name added: ', newName);
+        this.recipeObj.name = newName;
+  
+        res.json(this.recipeObj.name);
+      });
         
           
         
         
         
   
-    
-  
-  
-  
-
-
-
