@@ -1,12 +1,16 @@
 
-const Recipe = require('./recipe_handler.class');
-
-
 module.exports = class Routes {
 
-  constructor(app, ingredients){
+
+
+  constructor(app, ingredientData) {
     this.app = app;
-    this.ingredients = ingredients;
+    this.ingredientData = ingredientData;
+    this.recipeObj = {
+      ingredients: [],
+      instructions: [],
+      nutrition: []
+    };
     this.setRoutes();
   }
 
@@ -31,7 +35,9 @@ module.exports = class Routes {
         res.json(result);
       }
     ); 
+    //------------------
     //Filtering recipe
+    //------------------
     this.app.get(
       '/recipes-by-category/:category',
       async (req, res) => {
@@ -53,29 +59,10 @@ module.exports = class Routes {
 
 
 
-   /* this.app.get(
-      '/recipes-by-category/:category',
-      (req, res) => {
-        
-        let valCategory = req.params.category.toLowerCase();
-        let cat = require('../json/recipe.json') || [];
-        
-        //categories.category.forEach((recipe) => {
-          console.log(cat.category);
-          categories = cat.category.filter(function (e){
-            if(e.toLowerCase().includes(valCategory)){
-              return e.toLowerCase();
-            }
-          })
-          let result = categories.category.filter((cat) => {
-            return cat.toLowerCase().includes(valCategory)
-            }) 
-        
-        
-        res.json(categories);
-      }*/
-    
+   
+    //--------------------------
     //Searching through recipes
+    //--------------------------
     this.app.get(
       '/autocomplete-recipe-name/:startOfName',
       (req, res) => {
@@ -119,7 +106,7 @@ module.exports = class Routes {
     this.app.get(
       '/recipe-by-name/:name', 
       async (req, res) => {
-        let recipe = await RecipeHandler.readFromFile(req.params.name)
+        let recipe = await RecipeHandler.readFromFile(req.params.name);
         res.json(recipe);
       }
     );
@@ -132,10 +119,60 @@ module.exports = class Routes {
         res.json(result);
       }
     );
+    //-------------------------------
+    //to get single recipe from list
+    //-------------------------------
+    /* this.app.get(
+      '/recipe-list/:name',
+      
+         async (req, res) => {
+          let value = req.params.name.toLowerCase();
+          if (value.length === 0) {
+            res.json({ error: 'No recipe name' });
+            return;
+          }
+          let recipes = require('../json/recipe.json')
+          //console.log(recipes);
+          let recipe = recipes.find((recipe) => {
+
+            recipe.name.toLowerCase().includes(value);
+          });
+
+          res.json(recipe); 
+          console.log(recipe);//why is this undefined?
+          
+          });
+        } */
+        this.app.get(
+          '/recipe-list/:name',
+          
+             async (req, res) => {
+              
+              let value = req.params.name.toLowerCase();
+              if (value.length === 0) {
+                res.json({ error: 'No recipe name' });
+                return;
+              }
+              let recipes = require('../json/recipe.json');
+      
+              let recipe = recipes.find((recipe) => recipe.name.toLowerCase().includes(value));
+      
+              res.json(recipe);
+              console.log(recipe);
+            } 
+          );
+        }
+      }
+        
+          
+        
+        
+        
+  
     
   
   
-  }
-}
+  
+
 
 
