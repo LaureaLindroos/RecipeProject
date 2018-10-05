@@ -86,7 +86,7 @@
         <label for="recipe-instruction" class="sr-only">Instruktioner</label>
         <input id="recipe-instruction" type="text" name="recipe_instruction" class="form-control" placeholder="Instruktion">
         <div class="input-group-prepend">
-          <button type="button" id="add_instruction">Lägg till</button>
+          <button type="button" id="add_instruction" class="btn btn-outline-secondary">Lägg till</button>
         </div>
 
       
@@ -112,7 +112,6 @@
       <div class="input-group mb-3">
         <label for="ingredient-name" class="sr-only">Ingrediens</label>
         <input input id="ingredient-name" type="text" name="ingredient_name" class="form-control clear-input" placeholder="Ingrediens">
-        <section id="display-ingredients"></section>
       </div>
       <ul id="ingredientAc"></ul>
       <div class="input-group mb-3">
@@ -143,13 +142,13 @@
         <button type="button" id="add_ingredient" class="btn btn-outline-secondary">Lägg till</button>
       </div>
     </form>
-    <ul id="ingredientsAdded" name="ingredients" required></ul>
+    <ul id="display-ingredients" name="ingredients" required></ul>
 
   </div>
 
   </main>
   <div class="container" id=preview-button>
-    <button type="button" id="preview-button" class="btn btn-outline-secondary">Förhandsvisning</button>
+  <input type="submit" id="preview-button" value="submit" class="btn btn-outline-secondary" placeholder="Förhandsvisning">
   </div>
   <div id="preview" class="container">
 

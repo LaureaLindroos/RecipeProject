@@ -18,26 +18,29 @@ module.exports = class Routes {
   
 
   setRoutes(){
-//how to search through ingredients
-     this.app.get(
-      '/autocomplete-ingredient-name/:startOfName',
-      (req, res) => {
-        
-        let start = req.params.startOfName.toLowerCase();
-        
-        if(start.length < 2){
-          res.json({error: 'Please provide at least two characters...'});
-          return;
-        }
-        
-        let result = this.ingredients.filter(
-          ingredient => ingredient.name.toLowerCase().indexOf(start) == 0
-        ).map(
-          ingredient => ingredient.name
-        );
-        res.json(result);
-      }
-    ); 
+//-------------------------    
+//Autocomplete Ingredients
+//-------------------------
+this.app.get(
+  '/autocomplete-ingredient-name/:startOfName',
+  (req, res) => {
+
+
+    let start = req.params.startOfName.toLowerCase();
+
+    if (start.length < 2) {
+      res.json({ error: 'Please provide at least two characters...' });
+      return;
+    }
+    let ingredients = require('../json/livsmedelsdata.json') || [];
+
+    let result = ingredients.filter((ingredient) => {
+      return ingredient.Namn.toLowerCase().includes(start)
+    })
+
+    res.json(result);
+  }
+);
     //------------------
     //Filtering recipe
     //------------------

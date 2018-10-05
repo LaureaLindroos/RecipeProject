@@ -91,11 +91,12 @@ $('#add_ingredient').click(function () {
             unit: unit,
             measuringUnit: measuringUnit,
             unitEquivalentInGrams: unitEquivalentInGrams,
-            unitPerPortion: unitEquivalentInGrams / portion
+            unitPerPortion: unitEquivalentInGrams / portions
         });
 
 
         $('#display-ingredients').append(`<li>${name} ${unit}${measuringUnit} mängd i gram: ${unitEquivalentInGrams}</li>`);
+        console.log(ingredientArray, "added");
         emptyIngredient();
     }
 });
@@ -111,7 +112,7 @@ function emptyIngredient() {
 ///////URL ADDING
 $('#add_image').click(function () {
     imageUrl = $('#imageUrl').val();
-    alert("Bild tillagd!")
+    alert("Mmmmmm... ser gott ut!")
 
 })
 
@@ -145,15 +146,15 @@ $('#submit').click(function (e) {
     if (imageUrl === "") {
         alert("Du måste lägga till en bild-url!")
     }
-    else ;
+    else (postRecipe());
 });
-/*$('#preview-button').click(function (e) {
+$('#preview-button').click(function (e) {
     e.preventDefault();
     let name = $('#recipe-name').val();
     let portions = $('#recipe-portions').val();
     let category = $('#recipe-category').val();
     let instructions = $('#display-instructions li').val();
-    let ingredients = $('#ingredientsAdded li').val();
+    let ingredients = $('#display-ingredients li').val();
     let imageUrl = $('#recipe-image').val();
 
     $(".error").remove();
@@ -172,29 +173,41 @@ $('#submit').click(function (e) {
     }
     if (ingredients === undefined) {
         alert("Du måste lägga till ingredienser!")
-    }
+    } 
     if (imageUrl === "") {
         alert("Du måste lägga till en bild-url!")
     }
-    else (preViewRecipe());
-}); */
+    else (postPreview());
+});
 
 ///SEND RECIPE
 
-function postRecipe() {
-    //  let newRecipe = new AddRecipe(recipeName, recipePeople, instructionArray, ingredientArray, imageUrl);
+function postPreview() {
 
     let newRecipe = {
         name: recipeName,
-        people: recipePeople,
+        category: category,
+        portions: portions,
         instructions: instructionArray,
         ingredients: ingredientArray,
+        urlToImage: imageUrl
+    };
+
+    preViewRecipe(newRecipe);
+}
+function postRecipe() {
+
+    let newRecipe = {
+        name: recipeName,
         category: category,
+        portions: portions,
+        instructions: instructionArray,
+        ingredients: ingredientArray,
         urlToImage: imageUrl
     };
 
     addRes(newRecipe);
-    preViewRecipe(newRecipe);
+    
 }
 function preViewRecipe(newRecipe) {
 
@@ -202,21 +215,26 @@ function preViewRecipe(newRecipe) {
     display.addClass('display');
     $("#preview").append(display);
 
-    let title = $('<h4></h4>');
-    title.text(newRecipe.name);
+    let title = $(`<div class=row><p>Namn: </p><p>${newRecipe.name}</p></div>`);
     display.append(title);
+
+    let imageDisplay = $('<div></div>')
+    display.append(imageDisplay);
+    let image = $(`<img src="${newRecipe.urlToImg}" class="img-thumbnail">`)
+    imageDisplay.append(image);
 
     let portions = $(`<div class=row><p>Antal portioner: </p><p>${newRecipe.portions}</p></div>`)
     display.append(portions);
 
     let ingredientUlList = $('<ul></ul>');
     display.append(ingredientUlList);
-    newRecipe.ingredients.forEach((ingredient) => {
+    newRecipe.ingredients.forEach((ingredientArray) => {
         let ingredientLi = $('<li></li>');
-        ingredientLi.text(ingredient.name + ' ' + ingredient.units + ' ' + ingredient.measuringUnit);
+        ingredientLi.text(`Ingredienser: ${ingredientArray.name} ${ingredientArray.unit}${ingredientArray.measuringUnit} Mängd i gram:${ingredientArray.unitEquivalentInGrams}`);
         ingredientUlList.append(ingredientLi);
 
     })
+    
 
     let instructionsOlList = $('<ol></ol>');
     display.append(instructionsOlList);
@@ -225,11 +243,6 @@ function preViewRecipe(newRecipe) {
         instructionLi.text(instruction);
         instructionsOlList.append(instructionLi);
     })
-
-    let imageDisplay = $('<div></div>')
-    display.append(imageDisplay);
-    let image = $(`<img src="${newRecipe.urlToImg}" class="img-thumbnail">`)
-    imageDisplay.append(image);
 
     $('#preview').empty();
     $('section.display').remove();
