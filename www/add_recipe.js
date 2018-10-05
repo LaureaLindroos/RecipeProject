@@ -207,7 +207,7 @@ function postRecipe() {
     };
 
     addRes(newRecipe);
-    console.log(newrecipe);
+    console.log(newRecipe);
     
 }
 function preViewRecipe(newRecipe) {

@@ -1,92 +1,110 @@
 [
-{
-  "name": "Omelett",
-  "portions": 4,
-  "category":"Frukost",
-  "instructions": [
-    "Knäck äggen",
-    "Krydda äggsmeten med salt m.m.",
-    "Vispa äggen",
-    "Stek smeten",
-    "Lägg på tallrik"
-  ],
-  "ingredients": [
     {
-      "name": "ägg",
-      "units": 6,
-      "measuringUnit" : "st",
-      "unitEquivalentInGrams": 60
+        "name": "Omelett",
+        "portions": 4,
+        "category": "Frukost",
+        "instructions": [
+            "Knäck äggen",
+            "Krydda äggsmeten med salt m.m.",
+            "Vispa äggen",
+            "Stek smeten",
+            "Lägg på tallrik"
+        ],
+        "ingredients": [
+            {
+                "name": "ägg",
+                "units": 6,
+                "measuringUnit": "st",
+                "unitEquivalentInGrams": 60
+            }
+        ],
+        "urlToImg": "/images/beautiful-omelet.jpg"
+    },
+    {
+        "name": "pannkaka",
+        "portions": 4,
+        "category": "Frukost",
+        "instructions": [
+            "Blanda mjöl och salt i en bunke. Vispa i hälften av mjölken och vispa till en slät smet. Vispa i resten av mjölken och äggen.",
+            "Smält smöret i stekpannan och vispa ner i smeten. Stek tunna pannkakor av smeten i en stek- eller pannkakspanna.",
+            "Servera med exempelvis sylt, bär eller frukt"
+        ],
+        "ingredients": [
+            {
+                "name": "vetemjöl",
+                "units": 2.5,
+                "measuringUnit": "dl",
+                "unitEquivalentInGrams": 60
+            },
+            {
+                "name": "salt",
+                "units": 0.5,
+                "measuringUnit": "tsk",
+                "unitEquivalentInGrams": 6
+            },
+            {
+                "name": "mjölk",
+                "units": 6,
+                "measuringUnit": "dl",
+                "unitequivalentInGrams": 100
+            },
+            {
+                "name": "ägg",
+                "units": 3,
+                "measuringUnit": "st",
+                "unitEquivalentInGrams": 60
+            },
+            {
+                "name": "smör",
+                "units": 3,
+                "measuringUnit": "msk",
+                "unitEquivalentInGrams": 15
+            }
+        ],
+        "urlToImg": "/images/beautiful-pasta.jpg"
+    },
+    {
+        "name": "Pasta med smör",
+        "portions": 2,
+        "category": "Guilty Pleasure",
+        "instructions": [
+            "Häll vatten i en kastrull och koka upp på full värme.",
+            "När vattnet kokar häll i pastan, följ minutanvisningarna på förpackningen.",
+            "Fiska upp en bit pasta och kolla så att den är klar, ha gärna kvar lite tuggmotstånd.",
+            "Använd en sked och rör ner smör."
+        ],
+        "ingredients": [
+            {
+                "name": "Pasta",
+                "units": 4,
+                "measuringUnit": "dl",
+                "unitEquivalentInGrams": 350
+            },
+            {
+                "name": "smör",
+                "units": 3,
+                "measuringUnit": "tsk",
+                "unitEquivalentInGrams": 50
+            }
+        ],
+        "urlToImg": "/images/beautiful-pasta.jpg"
+    },
+    {
+        "name": "fish n chips",
+        "portions": "4",
+        "category": "middag",
+        "instructions": [
+            "gör såhär"
+        ],
+        "ingredients": [
+            {
+                "name": "Fisk friterad",
+                "unit": "2",
+                "measuringUnit": "st",
+                "unitEquivalentInGrams": "200",
+                "gramPerPortion": 50
+            }
+        ],
+        "urlToImg": "images/fish-and-chips-2.jpg"
     }
-  ],
-  "urlToImg" : "/images/beautiful-omelet.jpg"
-},
-{
-  "name": "pannkaka",
-  "portions": 4,
-  "category":"Frukost",
-  "instructions": [
-    "Blanda mjöl och salt i en bunke. Vispa i hälften av mjölken och vispa till en slät smet. Vispa i resten av mjölken och äggen.",
-    "Smält smöret i stekpannan och vispa ner i smeten. Stek tunna pannkakor av smeten i en stek- eller pannkakspanna.",
-    "Servera med exempelvis sylt, bär eller frukt"
-  ],
-  "ingredients": [
-    {
-      "name": "vetemjöl",
-      "units": 2.5,
-      "measuringUnit": "dl",
-      "unitEquivalentInGrams": 60
-    },
-    {
-      "name": "salt",
-      "units": 0.5,
-      "measuringUnit": "tsk",
-      "unitEquivalentInGrams": 6
-    }, 
-    {
-      "name": "mjölk",
-      "units": 6,
-      "measuringUnit": "dl",
-      "unitequivalentInGrams":100
-    },
-    {
-      "name": "ägg",
-      "units": 3,
-      "measuringUnit": "st",
-      "unitEquivalentInGrams": 60
-    },
-    {
-      "name": "smör",
-      "units": 3,
-      "measuringUnit": "msk",
-      "unitEquivalentInGrams": 15
-    }
-  ],
-  "urlToImg": "/images/beautiful-pasta.jpg"
-},
-{
-  "name": "Pasta med smör",
-  "portions": 2,
-  "category":"Guilty Pleasure",
-  "instructions": [
-      "Häll vatten i en kastrull och koka upp på full värme.",
-      "När vattnet kokar häll i pastan, följ minutanvisningarna på förpackningen.",
-      "Fiska upp en bit pasta och kolla så att den är klar, ha gärna kvar lite tuggmotstånd.",
-      "Använd en sked och rör ner smör."
-  ],
-  "ingredients": [
-      {
-          "name": "Pasta",
-          "units": 4,
-          "measuringUnit": "dl",
-          "unitEquivalentInGrams": 350
-      },
-      {
-          "name": "smör",
-          "units": 3,
-          "measuringUnit": "tsk",
-          "unitEquivalentInGrams": 50
-      }
-  ],
-  "urlToImg": "/images/beautiful-pasta.jpg"
-}
 ]

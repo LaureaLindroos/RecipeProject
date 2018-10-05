@@ -134,24 +134,23 @@ this.app.get(
               console.log(recipe);
             } 
           );
-        }
-      }
-      //------------
+          //------------
       //post recipe
       //-------------
-    /* this.app.post(
+    this.app.post(
       '/addrecipe',
       async (req, res) => {
         var fs = require('fs');
         var addJson= req.body;
-        const jsonFile = '/Users/laurea/Desktop/AvanceradJavascript/RecipeProject/recipe.json';
+        const jsonFile = '/Users/laurea/Desktop/Avancerad Javascript/RecipeProject/json/recipe.json';
         
         fs.readFile(jsonFile, function (err, data) {
-          var json = JSON.parse(data);
+         var json = JSON.parse(data);
+          console.log(data);
 
           json.push(addJson);
 
-          fs.writeFile(jsonFile, JSON.stringify(json, null, 4),"utf8",err=>{
+          fs.writeFile(jsonFile, JSON.stringify(json, null, 4),"utf8",err => {
             if(err) {console.log(err)
             alert("Ej Tillagt!")};
             res.json({ saved: true });
@@ -159,7 +158,10 @@ this.app.get(
         })
       }
       
-      );*/
+      );
+        }
+      }
+      
 
     
 
