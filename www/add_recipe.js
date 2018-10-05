@@ -91,7 +91,7 @@ $('#add_ingredient').click(function () {
             unit: unit,
             measuringUnit: measuringUnit,
             unitEquivalentInGrams: unitEquivalentInGrams,
-            unitPerPortion: unitEquivalentInGrams / portions
+            gramPerPortion: unitEquivalentInGrams / portions
         });
 
 
@@ -111,7 +111,7 @@ function emptyIngredient() {
 
 ///////URL ADDING
 $('#add_image').click(function () {
-    imageUrl = $('#imageUrl').val();
+    imageUrl = $('#recipe-image').val();
     alert("Mmmmmm... ser gott ut!")
 
 })
@@ -123,7 +123,7 @@ $('#submit').click(function (e) {
     let portions = $('#recipe-portions').val();
     let category = $('#recipe-category').val();
     let instructions = $('#display-instructions li').val();
-    let ingredients = $('#ingredientsAdded li').val();
+    let ingredients = $('#display-ingredients li').val();
     let imageUrl = $('#recipe-image').val();
 
     $(".error").remove();
@@ -186,11 +186,11 @@ function postPreview() {
 
     let newRecipe = {
         name: recipeName,
-        category: category,
         portions: portions,
+        category: category,
         instructions: instructionArray,
         ingredients: ingredientArray,
-        urlToImage: imageUrl
+        urlToImg: imageUrl
     };
 
     preViewRecipe(newRecipe);
@@ -199,14 +199,15 @@ function postRecipe() {
 
     let newRecipe = {
         name: recipeName,
-        category: category,
         portions: portions,
+        category: category,
         instructions: instructionArray,
         ingredients: ingredientArray,
-        urlToImage: imageUrl
+        urlToImg: imageUrl
     };
 
     addRes(newRecipe);
+    console.log(newrecipe);
     
 }
 function preViewRecipe(newRecipe) {
@@ -255,12 +256,15 @@ function preViewRecipe(newRecipe) {
 function addRes(recipe) {
 
     $.ajax({
-        url: 'http://localhost:3000/addrecipe',
+        url: '/addrecipe',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(recipe),
+        processData: false,
+        dataType: "json",
         success: function (res) {
-            alert("Receptet är tillagt")
+            console.log("RECIPE ADDED!")
+            alert("Du har lagt till ditt recept")
             emptyForm();
         }
     })
@@ -268,9 +272,9 @@ function addRes(recipe) {
 
 function emptyForm() {
     $('#recipeName').val('');
-    $('#nbrPeople').val('');
-    $('#measurementSelector').prop('selectedIndex', 0);
-    $('#imageUrl').val('');
-    $('#instructionsAdded').empty();
-    $('#ingredientsAdded').empty();
+    $('#recipe-portions').val('');
+    $('#measure-unit').prop('selectedIndex', 0);
+    $('#recipe-image').val('');
+    $('#display-instructions').empty();
+    $('#display-ingredients').empty();
 }

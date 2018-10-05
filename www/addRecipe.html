@@ -80,7 +80,7 @@
 
       </form>
     </div>
-<div class=form-group>
+<div class=input-group mb3>
       <form id="instruction-form">
 
         <label for="recipe-instruction" class="sr-only">Instruktioner</label>
@@ -99,7 +99,7 @@
       
         <div class="input-group mb-3">
           <label for="recipe-img" class="sr-only">Bild</label>
-          <input id="recipe-image" type="text" name="recipe_image" class="form-control clear-input" placeholder="Ladda upp bild">
+          <input type="image" name="url" class="form-control" id="recipe-image" placeholder="Skriv in bildUrl" required >
           <div class="input-group-prepend">
             <button type="button" id="add_image" class="btn btn-outline-secondary">Lägg till</button>
           </div>
@@ -142,13 +142,15 @@
         <button type="button" id="add_ingredient" class="btn btn-outline-secondary">Lägg till</button>
       </div>
     </form>
+    <div id=preview class=col>
+      <h5>Såhär ser ditt recept ut:</h5>
     <ul id="display-ingredients" name="ingredients" required></ul>
-
+    </div>
   </div>
 
   </main>
   <div class="container" id=preview-button>
-  <input type="submit" id="preview-button" value="submit" class="btn btn-outline-secondary" placeholder="Förhandsvisning">
+  <input type="submit" id="preview-button" value="Förhandsvisning" class="btn btn-outline-secondary" placeholder="Förhandsvisning">
   </div>
   <div id="preview" class="container">
 

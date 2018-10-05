@@ -1,9 +1,5 @@
 const Recipe = require('./recipe_handler.class');
 
-const fs = require('fs');
-const path = require('path');
-const recipePath = path.join(__dirname, '../json/recipe.json');
-let recipes = require(recipePath);
 
 module.exports = class Routes {
 
@@ -116,15 +112,6 @@ this.app.get(
         res.json(recipe);
       }
     );
-
-    this.app.post(
-      '/recipe', 
-      async (req, res) => {
-        let recipe = new RecipeHandler(req.body);
-        let result = await recipe.writeToFile();
-        res.json(result);
-      }
-    );
     //-------------------------------
     //to get single recipe from list
     //-------------------------------
@@ -149,32 +136,31 @@ this.app.get(
           );
         }
       }
+      //------------
+      //post recipe
+      //-------------
+    /* this.app.post(
+      '/addrecipe',
+      async (req, res) => {
+        var fs = require('fs');
+        var addJson= req.body;
+        const jsonFile = '/Users/laurea/Desktop/AvanceradJavascript/RecipeProject/recipe.json';
+        
+        fs.readFile(jsonFile, function (err, data) {
+          var json = JSON.parse(data);
 
-      /* this.app.post(
-        '/add-name', (req, res) => {
-        console.log(req.body);
-        let newName = req.body.recipe_name;
-  
-        console.log('New name added: ', newName);
-        this.recipeObj.name = newName;
-  
-        res.json(this.recipeObj.name);
-      }); */
-      //find nutrition
-    /* this.app.get(
-      '/ingredients/:ingredient',
-      (req, res) => {
+          json.push(addJson);
 
-        let ingredients = req.params.ingredient.toLowerCase();
-
-        let ingredientDb = require('../json/livsmedelsdata.json') || [];
-
-        let result = ingredientDb.find((ing) => ing.Namn.toLowerCase()===ingredients);
-
-        res.json(result);
-
+          fs.writeFile(jsonFile, JSON.stringify(json, null, 4),"utf8",err=>{
+            if(err) {console.log(err)
+            alert("Ej Tillagt!")};
+            res.json({ saved: true });
+          })
+        })
       }
-    ); */
-        
-          
-        
+      
+      );*/
+
+    
+
+       
