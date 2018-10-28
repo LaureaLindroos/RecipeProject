@@ -104,6 +104,7 @@ $('#search-result').click(function (event) {
 //------------------------------
 //Display  recipe data on page
 //-------------------------------
+
 function getRecipeData(name) {
     $.get('http://localhost:3000/recipe-list/' + name, (data) => {
         $('#search-result').empty();
@@ -112,6 +113,7 @@ function getRecipeData(name) {
         findingNutrition(data.ingredients);
     });
 }
+let calculatePortions;
 
 function displayRecipeData(data) {
     let display = $('<section></section>');
@@ -122,8 +124,21 @@ function displayRecipeData(data) {
     title.text(data.name);
     display.append(title);
 
-    let portions = $(`<div class=row><p>Antal portioner: </p><p>${data.portions}</p></div>`)
-    display.append(portions);
+    let imageDisplay = $('<div></div>')
+    display.append(imageDisplay);
+    let image= $(`<img src="${data.urlToImg}" class="img-thumbnail">`)
+    imageDisplay.append(image);
+
+    calculatePortions = recipeName.portions;
+
+    let portions = $(`<select id="selectPortions">
+    <option selected value="${recipeName.portions}">${recipeName.portions}</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="4">4</option>
+    <option value="8">8</option>
+  </select>`)
+    display.append(people);
 
     let ingredientUlList = $('<ul></ul>');
     display.append(ingredientUlList);
@@ -142,10 +157,7 @@ function displayRecipeData(data) {
         instructionsOlList.append(instructionLi);
     })
 
-    let imageDisplay = $('<div></div>')
-    display.append(imageDisplay);
-    let image= $(`<img src="${data.urlToImg}" class="img-thumbnail">`)
-    imageDisplay.append(image);
+    
 
     $('#search-result').empty();
     $('section.display').remove();
@@ -178,6 +190,17 @@ function displayRecipeData(data) {
         console.log($("#select-category").val());
         filterCategories(category);
     })
+    function getNutritionData(ingredient){
+        
+    }
+   
+
+
+
+    //----------------------------
+    //Nutrition
+    //---------------------------
+
     
 
 
