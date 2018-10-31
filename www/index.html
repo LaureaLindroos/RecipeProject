@@ -29,26 +29,33 @@
         
           </div>
         </nav>
+        <div class="mx-auto" style="width: 500px;">
+    <div id="search-field" class="container mb-5 pb-5 mt-5 mb-5">
     <h2>Här kan du söka på recept:</h2>
-    <ul>
-    <input id="search-value" type="text" name="recipe-search">
-    </ul>
+      <form id="search-form" class="form-inline">
+      <div class="form-group">
+    <input id="search-value" type="text" name="recipe-search" class="form-control">
     <ul class="list-group" id="resultAc"></ul>
     <ul class="list-group" id="filter-result">
-        <div class="form-group mb-3">
-            <label for="exampleFormControlSelect1">Kategori</label>
-            <select class="form-control" id="select-category">
-                <option value="0" hidden>Välj kategori...</option>
-                <option value="frukost">Frukost</option>
-                <option value="lunch">Lunch</option>
-                <option value="middag">Middag</option>
-                <option value="guilty pleasure">Guilty Pleasures</option>
-            </select>
-          </div>
+        <form id="category-form">
 
+            <select id="recipe-category" type="text" name="recipe_category" class="form-control">
+              <option value="0" hidden>Välj kategori...</option>
+              <option value="frukost">Frukost</option>
+              <option value="lunch">Lunch</option>
+              <option value="middag">Middag</option>
+              <option value="guilty pleasure">Guilty Pleasures</option>
+            </select>
+
+    
     </ul>
-    <button id="search-button">Sök</button>
+    <div class="input-group append">
+    <button id="search-button" class="btn btn-outline-secondary">Sök</button>
     </div>
+  </form>
+    </div>
+    </div>
+  </div>
     <div class="row">
     <div class="col-8">
       <section id="search-result">
