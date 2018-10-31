@@ -64,7 +64,7 @@
 
       </form>
     </div>
-<div class=input-group mb3>
+    <div class="input-group mb-3">
       <form id="instruction-form">
 
         <label for="recipe-instruction" class="sr-only">Instruktioner</label>
@@ -72,75 +72,77 @@
         <div class="input-group-prepend">
           <button type="button" id="add_instruction" class="btn btn-outline-secondary">Lägg till</button>
         </div>
-
-      
-      </div>
-      <div class="col-5">
-        <p>(Lägg till intrutioner steg för steg)</p>
-        <ol id="display-instructions" name="instructions"></ol>
-      </div>
-
-      
-        <div class="input-group mb-3">
-          <label for="recipe-img" class="sr-only">Bild</label>
-          <input type="text" name="url" class="form-control" id="recipe-image" placeholder="Skriv in bildUrl" required >
-          <div class="input-group-prepend">
-            <button type="button" id="add_image" class="btn btn-outline-secondary">Lägg till</button>
-          </div>
-        </div>
       </form>
+
+
+    </div>
+    <div class="col-5">
+      <p>(Lägg till intrutioner steg för steg)</p>
+      <ol id="display-instructions" name="instructions"></ol>
+    </div>
+  
+
+
+    <div class="input-group mb-3">
+      <label for="recipe-img" class="sr-only">Bild</label>
+      <input type="text" name="url" class="form-control" id="recipe-image" placeholder="Skriv in bildUrl" required>
+      <div class="input-group-prepend">
+        <button type="button" id="add_image" class="btn btn-outline-secondary">Lägg till</button>
+      </div>
+    </div>
+  
+
+
+  <form id="ingredient-form" class="form-inline">
+    <div class="input-group mb-3">
+      <label for="ingredient-name" class="sr-only">Ingrediens</label>
+      <input input id="ingredient-name" type="text" name="ingredient_name" class="form-control clear-input" placeholder="Ingrediens">
+    </div>
+    <ul id="ingredientAc"></ul>
+    <div class="input-group mb-3">
+      <label for="units" class="sr-only">Mängd</label>
+      <input id="NoOfUnits" type="text" name="ingredient_units" class="form-control clear-input" placeholder="Mängd">
+    </div>
+    <div class="input-group mb-3">
+      <label for="measure-unit" class="sr-only">Måttenhet</label>
+      <select id="measure-unit" type="text" name="ingredient_measuring_unit" class="form-control">
+        <option value="0" hidden>Välj enhet...</option>
+        <option value="dl">dl</option>
+        <option value="msk">cl</option>
+        <option value="msk">ml</option>
+        <option value="msk">msk</option>
+        <option value="tsk">tsk</option>
+        <option value="krm">krm</option>
+        <option value="g">g</option>
+        <option value="st">st</option>
+        <option value="kg">kg</option>
+        <option value="l">l</option>
+      </select>
+    </div>
+    <div class="input-group mb-3">
+      <label for="grams" class="sr-only">Gram</label>
+      <input input id="grams" type="text" name="ingredient_grams" class="form-control clear-input" placeholder="Gram">
+    </div>
+    <div class="input-group-prepend">
+      <button type="button" id="add_ingredient" class="btn btn-outline-secondary">Lägg till</button>
     </div>
   </form>
-
-    <form id="ingredient-form" class="form-inline">
-      <div class="input-group mb-3">
-        <label for="ingredient-name" class="sr-only">Ingrediens</label>
-        <input input id="ingredient-name" type="text" name="ingredient_name" class="form-control clear-input" placeholder="Ingrediens">
-      </div>
-      <ul id="ingredientAc"></ul>
-      <div class="input-group mb-3">
-        <label for="units" class="sr-only">Mängd</label>
-        <input id="NoOfUnits" type="text" name="ingredient_units" class="form-control clear-input" placeholder="Mängd">
-      </div>
-      <div class="input-group mb-3">
-        <label for="measure-unit" class="sr-only">Måttenhet</label>
-        <select id="measure-unit" type="text" name="ingredient_measuring_unit" class="form-control">
-          <option value="0" hidden>Välj enhet...</option>
-          <option value="dl">dl</option>
-          <option value="msk">cl</option>
-          <option value="msk">ml</option>
-          <option value="msk">msk</option>
-          <option value="tsk">tsk</option>
-          <option value="krm">krm</option>
-          <option value="g">g</option>
-          <option value="st">st</option>
-          <option value="kg">kg</option>
-          <option value="l">l</option>
-        </select>
-      </div>
-      <div class="input-group mb-3">
-        <label for="grams" class="sr-only">Gram</label>
-        <input input id="grams" type="text" name="ingredient_grams" class="form-control clear-input" placeholder="Gram">
-      </div>
-      <div class="input-group-prepend">
-        <button type="button" id="add_ingredient" class="btn btn-outline-secondary">Lägg till</button>
-      </div>
-    </form>
-    <div id=preview class=col>
-      <h5>Såhär ser ditt recept ut:</h5>
+  <div id=preview class=col>
+    <h5>Såhär ser ditt recept ut:</h5>
     <ul id="display-ingredients" name="ingredients" required></ul>
-    </div>
+  </div>
   </div>
 
   </main>
   <div class="container" id=preview-button>
-  <input type="submit" id="preview-button" value="Förhandsvisning" class="btn btn-outline-secondary" placeholder="Förhandsvisning">
+    <input type="submit" id="preview-button" value="Förhandsvisning" class="btn btn-outline-secondary" placeholder="Förhandsvisning">
   </div>
   <div id="preview" class="container">
 
 
 
   </div>
+</div>
 
   <div class="container">
     <input id="submit" type="submit" value="submit" placeholder="lägg till recept" class="btn btn-outline-secondary">
