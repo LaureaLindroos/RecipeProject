@@ -140,7 +140,7 @@ function displayRecipeData(data) {
   </select>`)
     display.append(portions);
 
-    let ingredientTable = $('<table id="ingredientsTable"></table>');
+    let ingredientTable = $('<table id="ingredientsTable" class="table"></table>');
     let tableHead = $(`<thead>
     <tr>
       <th scope="col">Namn</th>
