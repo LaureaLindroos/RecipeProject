@@ -74,15 +74,15 @@ function listRecipes(recipe) {
 $("#select-category").click(function (event) {
     var target = $(event.target);
     if (target.is("option")) {
-        console.log(target.text())
         filterCategories(target.text());
     }
 });
 
 
 function filterCategories(category) {
+    emptyNutrients();
+    $('#nutritionSection').hide();
     
-    console.log(category);
     $.get('http://localhost:3000/recipes-by-category/' + category, (data) => {
         $('#search-result').empty();
         data.forEach(listRecipes);
@@ -98,13 +98,13 @@ $('#search-result').click(function (event) {
 
     if (target.is("li")) {
         getRecipeData(target.text());
-        console.log("Click!!!");
     }
 });
 
 //------------------------------
 //Display  recipe data on page
 //-------------------------------
+let calculatePortions;
 
 function getRecipeData(name) {
     $.get('http://localhost:3000/recipe-list/' + name, (data) => {
@@ -114,7 +114,6 @@ function getRecipeData(name) {
         findingNutrition(data.ingredients);
     });
 }
-let calculatePortions;
 
 function displayRecipeData(data) {
     let display = $('<section></section>');
@@ -186,8 +185,8 @@ $('#search-result').on('change', '#selectPortions', function () {
 
     let newPortions = $('#selectPortions').val();
 
-    let change = + parseFloat((parseFloat(newPortions) / parseFloat(portionsCalc)));
-    portionsCalc = newPortions;
+    let change = + parseFloat((parseFloat(newPortions) / parseFloat(calculatePortions)));
+    calculatePortions = newPortions;
     $('#ingredientsTable tr').each(function () {
         $(this).find('#measurementCalc').each(function () {
             let currentMeasurement = parseFloat($(this).text());
