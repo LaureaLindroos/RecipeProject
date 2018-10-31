@@ -10,7 +10,6 @@
 $(document).keypress( function(e){
     let searchValue = $('#search-value').val();
     if(e.key === "Enter"){
-        console.log("You've pressed the enter key!");
         getRecipes(searchValue);
     }
 })
@@ -32,10 +31,8 @@ function getRecipes(searchValue){
 //---------------
 $("#resultAc").click(function (event) {
     var target = $(event.target);
-    if (target.is("li")) {
         $('#search-value').val(target.text());
         getRecipes(target.text());
-    }
 });
 $('#search-value').keyup(function () {
     $('#result').html('');
@@ -74,15 +71,15 @@ function listRecipes(recipe) {
 $("#select-category").click(function (event) {
     var target = $(event.target);
     if (target.is("option")) {
-        console.log(target.text())
         filterCategories(target.text());
     }
 });
 
 
 function filterCategories(category) {
+    emptyNutrients();
+    $('#nutritionSection').hide();
     
-    console.log(category);
     $.get('http://localhost:3000/recipes-by-category/' + category, (data) => {
         $('#search-result').empty();
         data.forEach(listRecipes);
@@ -98,15 +95,17 @@ $('#search-result').click(function (event) {
 
     if (target.is("li")) {
         getRecipeData(target.text());
-        console.log("Click!!!");
     }
 });
 
 //------------------------------
 //Display  recipe data on page
 //-------------------------------
+let calculatePortions;
 
 function getRecipeData(name) {
+    $('#nutritionSection').hide();
+    emptyNutrients();
     $.get('http://localhost:3000/recipe-list/' + name, (data) => {
         $('#search-result').empty();
         $('#resultAc').empty();
@@ -114,9 +113,9 @@ function getRecipeData(name) {
         findingNutrition(data.ingredients);
     });
 }
-let calculatePortions;
 
 function displayRecipeData(data) {
+    $('#nutritionSection').show();
     let display = $('<section></section>');
     display.addClass('display');
     $("#search-result").append(display);
@@ -127,12 +126,12 @@ function displayRecipeData(data) {
 
     let imageDisplay = $('<div></div>')
     display.append(imageDisplay);
-    let image= $(`<img src="${data.urlToImg}" class="img-thumbnail">`)
+    let image= $(`<img src="${data.urlToImg}" class="figure-img img-fluid rounded">`)
     imageDisplay.append(image);
 
     calculatePortions = data.portions;
 
-    let portions = $(`<select id="selectPortions">
+    let portions = $(`<h4>Antal Portioner:</h4><select id="selectPortions">
     <option selected value="${data.portions}">${data.portions}</option>
     <option value="1">1</option>
     <option value="2">2</option>
@@ -141,10 +140,10 @@ function displayRecipeData(data) {
   </select>`)
     display.append(portions);
 
-    let ingredientTable = $('<table id="ingredientsTable"></table>');
+    let ingredientTable = $('<table id="ingredientsTable" class="table"></table>');
     let tableHead = $(`<thead>
     <tr>
-      <th scope="col">Namn</th>
+      <th scope="col">Ingredienser</th>
       <th scope="col">Antal</th>
       <th scope="col">Enhet</th>
     </tr>
@@ -165,7 +164,7 @@ function displayRecipeData(data) {
     ingredientTable.append(tableBody);
     display.append(ingredientTable);
 
-    let instructionsOlList = $('<ol></ol>');
+    let instructionsOlList = $('<ol><h4>Instruktioner:</h4></ol>');
     display.append(instructionsOlList);
     data.instructions.forEach((instruction) => {
         let instructionLi = $('<li></li>');
@@ -186,28 +185,20 @@ $('#search-result').on('change', '#selectPortions', function () {
 
     let newPortions = $('#selectPortions').val();
 
-    let change = + parseFloat((parseFloat(newPortions) / parseFloat(portionsCalc)));
-    portionsCalc = newPortions;
+    let change = + parseFloat((parseFloat(newPortions) / parseFloat(calculatePortions)));
+    calculatePortions = newPortions;
     $('#ingredientsTable tr').each(function () {
         $(this).find('#measurementCalc').each(function () {
             let currentMeasurement = parseFloat($(this).text());
             let newMeasurement = parseFloat((Math.ceil((currentMeasurement * change) * 2) / 2).toFixed(2));
             newMeasurement = newMeasurement.toString();
             $(this).text(newMeasurement.replace((".", ",")));
+           
         })
 
     })
 })
-//----------------------
-//Re-evaluate portions
-//---------------------
-$("#selectPortions").click(function (event) {
-    var target = $(event.target);
-    if (target.is("option")) {
-        console.log(target.text())
-        filterCategories(target.text());
-    }
-});
+
 
     //Filter
     //According to category
@@ -219,16 +210,13 @@ $("#selectPortions").click(function (event) {
         }
     });
     function filterCategories(category) {
-        console.log(category);
         $.get('http://localhost:3000/recipes-by-category/' + category, (data) => {
             $('#search-result').empty();
-            console.log(data);
             data.forEach(listRecipes);
         });
     }
     $("#select-category").on("change", function(){
         let category = $("#select-category").val();
-        console.log($("#select-category").val());
         filterCategories(category);
     })
     function getNutritionData(ingredient){
@@ -250,7 +238,7 @@ $("#selectPortions").click(function (event) {
         )
     }
     function getNutrition(ingredient) {
-        $.get('http://localhost:3000/ingredients/' + ingredients.name, (data) => {
+        $.get('http://localhost:3000/ingredients/' + ingredient.name.replace(/%/g, '_'), (data) => {
     
             nutritionCalculation(data, ingredient);
         });
@@ -260,7 +248,7 @@ $("#selectPortions").click(function (event) {
 
     //Calculations for nutritional data
 
-    function calculationNutrition(nutrition, ingredient) {
+    function nutritionCalculation(nutrition, ingredient) {
         let kolesterol = nutrition.Naringsvarden.Naringsvarde.find(findNutrient("kolesterol"));
         let energi = nutrition.Naringsvarden.Naringsvarde.find(findNutrient("energi"));
         let kolhydrat = nutrition.Naringsvarden.Naringsvarde.find(findNutrient("kolhydrat"));
@@ -273,7 +261,7 @@ $("#selectPortions").click(function (event) {
         let diSac = nutrition.Naringsvarden.Naringsvarde.find(findNutrient("disackarider"));
         let salt = nutrition.Naringsvarden.Naringsvarde.find(findNutrient("salt"));
     
-        let multiplyToGetNutrition = parseFloat((ingredient.unitPerPerson / 100).toFixed(2))
+        let multiplyToGetNutrition = parseFloat((ingredient.gramPerPortion / 100).toFixed(2))
         displayFat(fett.Varde, fettMatt.Varde, fettOmatt.Varde, fettFlero.Varde, multiplyToGetNutrition);
         displaySugar(sackaros.Varde, monoSac.Varde, diSac.Varde, multiplyToGetNutrition);
         displayCarbohydrates(kolhydrat.Varde, multiplyToGetNutrition);

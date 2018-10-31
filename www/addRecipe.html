@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
+    <link href="/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -26,25 +27,9 @@
           <li class="nav-item">
             <a class="nav-link" href="addRecipe.html">Admin</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              Categories
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Breakfast</a>
-              <a class="dropdown-item" href="#">Lunch</a>
-              <a class="dropdown-item" href="#">Dinner</a>
-              <a class="dropdown-item" href="#">Snack/Dessert</a>
-            </div>
-          </li>
       </div>
       </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
       </div>
     </nav>
   </section>
@@ -80,7 +65,7 @@
 
       </form>
     </div>
-<div class=input-group mb3>
+    <div class="input-group mb-3">
       <form id="instruction-form">
 
         <label for="recipe-instruction" class="sr-only">Instruktioner</label>
@@ -88,25 +73,26 @@
         <div class="input-group-prepend">
           <button type="button" id="add_instruction" class="btn btn-outline-secondary">Lägg till</button>
         </div>
-
-      
-      </div>
-      <div class="col-5">
-        <p>(Lägg till intrutioner steg för steg)</p>
-        <ol id="display-instructions" name="instructions"></ol>
-      </div>
-
-      
-        <div class="input-group mb-3">
-          <label for="recipe-img" class="sr-only">Bild</label>
-          <input type="text" name="url" class="form-control" id="recipe-image" placeholder="Skriv in bildUrl" required >
-          <div class="input-group-prepend">
-            <button type="button" id="add_image" class="btn btn-outline-secondary">Lägg till</button>
-          </div>
-        </div>
       </form>
+
+
     </div>
-  </form>
+    <div class="col-5">
+      <p>(Lägg till intrutioner steg för steg)</p>
+      <ol id="display-instructions" name="instructions"></ol>
+    </div>
+
+
+
+    <div class="input-group mb-3">
+      <label for="recipe-img" class="sr-only">Bild</label>
+      <input type="text" name="url" class="form-control" id="recipe-image" placeholder="Skriv in bildUrl" required>
+      <div class="input-group-prepend">
+        <button type="button" id="add_image" class="btn btn-outline-secondary">Lägg till</button>
+      </div>
+    </div>
+
+
 
     <form id="ingredient-form" class="form-inline">
       <div class="input-group mb-3">
@@ -116,7 +102,7 @@
       <ul id="ingredientAc"></ul>
       <div class="input-group mb-3">
         <label for="units" class="sr-only">Mängd</label>
-        <input id="NoOfUnits" type="text" name="ingredient_units" class="form-control clear-input" placeholder="Mängd">
+        <input id="NoOfUnits" type="number" name="ingredient_units" class="form-control clear-input" placeholder="Mängd">
       </div>
       <div class="input-group mb-3">
         <label for="measure-unit" class="sr-only">Måttenhet</label>
@@ -136,7 +122,7 @@
       </div>
       <div class="input-group mb-3">
         <label for="grams" class="sr-only">Gram</label>
-        <input input id="grams" type="text" name="ingredient_grams" class="form-control clear-input" placeholder="Gram">
+        <input input id="grams" type="number" name="ingredient_grams" class="form-control clear-input" placeholder="Gram">
       </div>
       <div class="input-group-prepend">
         <button type="button" id="add_ingredient" class="btn btn-outline-secondary">Lägg till</button>
@@ -144,18 +130,16 @@
     </form>
     <div id=preview class=col>
       <h5>Såhär ser ditt recept ut:</h5>
-    <ul id="display-ingredients" name="ingredients" required></ul>
+      <ul id="display-ingredients" name="ingredients" required></ul>
     </div>
   </div>
 
   </main>
   <div class="container" id=preview-button>
-  <input type="submit" id="preview-button" value="Förhandsvisning" class="btn btn-outline-secondary" placeholder="Förhandsvisning">
+    <input type="submit" id="preview-button" value="Förhandsvisning" class="btn btn-outline-secondary" placeholder="Förhandsvisning">
   </div>
   <div id="preview" class="container">
-
-
-
+  </div>
   </div>
 
   <div class="container">

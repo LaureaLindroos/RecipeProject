@@ -37,6 +37,24 @@ this.app.get(
     res.json(result);
   }
 );
+ //---------------
+      //find nutrition
+      //----------------
+    this.app.get(
+      '/ingredients/:ingredient',
+      (req, res) => {
+
+        let ingredients = req.params.ingredient.replace(/_/g, '%').toLowerCase();
+
+        let ingredientDb = require('../json/livsmedelsdata.json') || [];
+
+        let result = ingredientDb.find((ingredient) => ingredient.Namn.toLowerCase().includes(ingredients));
+        
+        res.json(result);
+      
+
+      }
+    );
     //------------------
     //Filtering recipe
     //------------------
@@ -44,13 +62,10 @@ this.app.get(
       '/recipes-by-category/:category',
       async (req, res) => {
         let valCategory = req.params.category.toLowerCase();
-        console.log(valCategory);
         let categories = require('../json/recipe.json') || [];
 
         categories = categories.filter((recipe) => {
-          console.log(recipe.category);
           if (recipe.category.toLowerCase() == valCategory) {
-            console.log("added to list");
             return recipe.name.toLowerCase();
           }
         })
@@ -131,26 +146,10 @@ this.app.get(
               let recipe = recipes.find((recipe) => recipe.name.toLowerCase().includes(value));
       
               res.json(recipe);
-              console.log(recipe);
+              
             } 
           );
-           //---------------
-      //find nutrition
-      //----------------
-    this.app.get(
-      '/ingredients/:ingredient',
-      (req, res) => {
-
-        let ingredients = req.params.ingredient.toLowerCase();
-
-        let ingredientDb = require('../json/livsmedelsdata.json') || [];
-
-        let result = ingredientDb.find((ing) => ing.Namn.toLowerCase().includes(ingredients));
-
-        res.json(result);
-
-      }
-    );
+          
       //------------
       //post recipe
       //-------------
@@ -159,16 +158,15 @@ this.app.get(
       async (req, res) => {
         var fs = require('fs');
         var addJson= req.body;
-        const jsonFile = '/Users/laurea/Desktop/Avancerad Javascript/RecipeProject/json/recipe.json';
+        const jsonFile = './json/recipe.json';
         
         fs.readFile(jsonFile, function (err, data) {
          var json = JSON.parse(data);
-          console.log(data);
 
           json.push(addJson);
 
           fs.writeFile(jsonFile, JSON.stringify(json, null, 4),"utf8",err => {
-            if(err) {console.log(err)
+            if(err) {
             alert("Ej Tillagt!")};
             res.json({ saved: true });
           })
