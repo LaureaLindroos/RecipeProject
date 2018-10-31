@@ -1,36 +1,70 @@
-
 const Recipe = require('./recipe_handler.class');
 
 
 module.exports = class Routes {
 
-  constructor(app, ingredients){
+
+
+  constructor(app, ingredients) {
     this.app = app;
     this.ingredients = ingredients;
     this.setRoutes();
   }
 
+  
+
   setRoutes(){
-//how to search through ingredients
-   /*  this.app.get(
-      '/autocomplete-ingredient-name/:startOfName',
-      (req, res) => {
-        
-        let start = req.params.startOfName.toLowerCase();
-        
-        if(start.length < 2){
-          res.json({error: 'Please provide at least two characters...'});
-          return;
-        }
-        
-        let result = this.ingredients.filter(
-          ingredient => ingredient.Namn.toLowerCase().indexOf(start) == 0
-        ).map(
-          ingredient => ingredient.Namn
-        );
-        res.json(result);
+//-------------------------    
+//Autocomplete Ingredients
+//-------------------------
+this.app.get(
+  '/autocomplete-ingredient-name/:startOfName',
+  (req, res) => {
+
+
+    let start = req.params.startOfName.toLowerCase();
+
+    if (start.length < 2) {
+      res.json({ error: 'Please provide at least two characters...' });
+      return;
+    }
+    let ingredients = require('../json/livsmedelsdata.json') || [];
+
+    let result = ingredients.filter((ingredient) => {
+      return ingredient.Namn.toLowerCase().includes(start)
+    })
+
+    res.json(result);
+  }
+);
+    //------------------
+    //Filtering recipe
+    //------------------
+    this.app.get(
+      '/recipes-by-category/:category',
+      async (req, res) => {
+        let valCategory = req.params.category.toLowerCase();
+        console.log(valCategory);
+        let categories = require('../json/recipe.json') || [];
+
+        categories = categories.filter((recipe) => {
+          console.log(recipe.category);
+          if (recipe.category.toLowerCase() == valCategory) {
+            console.log("added to list");
+            return recipe.name.toLowerCase();
+          }
+        })
+        res.json(categories);
       }
-    ); */
+    );
+  
+
+
+
+   
+    //--------------------------
+    //Searching through recipes
+    //--------------------------
     this.app.get(
       '/autocomplete-recipe-name/:startOfName',
       (req, res) => {
@@ -44,7 +78,7 @@ module.exports = class Routes {
         let result =this.recipes.filter(
           recipe = recipe.Namn.toLowerCase().indexOf(start) == 0
         ).map(
-          recipe => recipe.Namn
+          recipe => recipe.name
         );
         res.json(result);
       }
@@ -74,20 +108,80 @@ module.exports = class Routes {
     this.app.get(
       '/recipe-by-name/:name', 
       async (req, res) => {
-        let recipe = await Recipe.readFromFile(req.params.name)
+        let recipe = await RecipeHandler.readFromFile(req.params.name);
         res.json(recipe);
       }
     );
+    //-------------------------------
+    //to get single recipe from list
+    //-------------------------------
+    
+        this.app.get(
+          '/recipe-list/:name',
+          
+             async (req, res) => {
+              
+              let value = req.params.name.toLowerCase();
+              if (value.length === 0) {
+                res.json({ error: 'No recipe name' });
+                return;
+              }
+              let recipes = require('../json/recipe.json');
+      
+              let recipe = recipes.find((recipe) => recipe.name.toLowerCase().includes(value));
+      
+              res.json(recipe);
+              console.log(recipe);
+            } 
+          );
+           //---------------
+      //find nutrition
+      //----------------
+    this.app.get(
+      '/ingredients/:ingredient',
+      (req, res) => {
 
-    this.app.post(
-      '/recipe', 
-      async (req, res) => {
-        let recipe = new Recipe(req.body);
-        let result = await recipe.writeToFile();
+        let ingredients = req.params.ingredient.toLowerCase();
+
+        let ingredientDb = require('../json/livsmedelsdata.json') || [];
+
+        let result = ingredientDb.find((ing) => ing.Namn.toLowerCase().includes(ingredients));
+
         res.json(result);
+
       }
     );
+      //------------
+      //post recipe
+      //-------------
+    this.app.post(
+      '/addrecipe',
+      async (req, res) => {
+        var fs = require('fs');
+        var addJson= req.body;
+        const jsonFile = '/Users/laurea/Desktop/Avancerad Javascript/RecipeProject/json/recipe.json';
+        
+        fs.readFile(jsonFile, function (err, data) {
+         var json = JSON.parse(data);
+          console.log(data);
 
+          json.push(addJson);
+
+          fs.writeFile(jsonFile, JSON.stringify(json, null, 4),"utf8",err => {
+            if(err) {console.log(err)
+            alert("Ej Tillagt!")};
+            res.json({ saved: true });
+          })
+        })
+      }
+      
+      );
+      
   }
 }
 
+      
+
+    
+
+       
