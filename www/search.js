@@ -32,10 +32,8 @@ function getRecipes(searchValue){
 //---------------
 $("#resultAc").click(function (event) {
     var target = $(event.target);
-    if (target.is("li")) {
         $('#search-value').val(target.text());
         getRecipes(target.text());
-    }
 });
 $('#search-value').keyup(function () {
     $('#result').html('');
@@ -126,7 +124,7 @@ function displayRecipeData(data) {
 
     let imageDisplay = $('<div></div>')
     display.append(imageDisplay);
-    let image= $(`<img src="${data.urlToImg}" class="img-thumbnail">`)
+    let image= $(`<img src="${data.urlToImg}" class="figure-img img-fluid rounded">`)
     imageDisplay.append(image);
 
     calculatePortions = data.portions;
