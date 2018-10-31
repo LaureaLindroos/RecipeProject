@@ -81,6 +81,7 @@ $("#select-category").click(function (event) {
 
 
 function filterCategories(category) {
+    
     console.log(category);
     $.get('http://localhost:3000/recipes-by-category/' + category, (data) => {
         $('#search-result').empty();
@@ -129,16 +130,16 @@ function displayRecipeData(data) {
     let image= $(`<img src="${data.urlToImg}" class="img-thumbnail">`)
     imageDisplay.append(image);
 
-    calculatePortions = recipeName.portions;
+    calculatePortions = data.portions;
 
     let portions = $(`<select id="selectPortions">
-    <option selected value="${recipeName.portions}">${recipeName.portions}</option>
+    <option selected value="${data.portions}">${data.portions}</option>
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="4">4</option>
     <option value="8">8</option>
   </select>`)
-    display.append(people);
+    display.append(portions);
 
     let ingredientTable = $('<table id="ingredientsTable"></table>');
     let tableHead = $(`<thead>
@@ -153,10 +154,10 @@ function displayRecipeData(data) {
 
 
 
-    recipeName.ingredients.forEach((ingredient) => {
+    data.ingredients.forEach((ingredient) => {
         let ingredientLi = $(`<tr>
         <td>${ingredient.name}</td>
-        <td id="measurementCalc">${ingredient.unit}</td>
+        <td id="measurementCalc">${ingredient.units}</td>
         <td>${ingredient.measuringUnit}</td>
       </tr>`);
         tableBody.append(ingredientLi);
@@ -178,6 +179,35 @@ function displayRecipeData(data) {
     
 
 }
+//--------------------
+//Calculate portions
+//--------------------
+$('#search-result').on('change', '#selectPortions', function () {
+
+    let newPortions = $('#selectPortions').val();
+
+    let change = + parseFloat((parseFloat(newPortions) / parseFloat(portionsCalc)));
+    portionsCalc = newPortions;
+    $('#ingredientsTable tr').each(function () {
+        $(this).find('#measurementCalc').each(function () {
+            let currentMeasurement = parseFloat($(this).text());
+            let newMeasurement = parseFloat((Math.ceil((currentMeasurement * change) * 2) / 2).toFixed(2));
+            newMeasurement = newMeasurement.toString();
+            $(this).text(newMeasurement.replace((".", ",")));
+        })
+
+    })
+})
+//----------------------
+//Re-evaluate portions
+//---------------------
+$("#selectPortions").click(function (event) {
+    var target = $(event.target);
+    if (target.is("option")) {
+        console.log(target.text())
+        filterCategories(target.text());
+    }
+});
 
     //Filter
     //According to category
@@ -346,23 +376,7 @@ function displayRecipeData(data) {
         $('#sumDi').text(0);
         $('#sumSalt').text(0);
     }
-//Calculate portions
-    $('#search-result').on('change', '#selectPortions', function () {
 
-        let newPeople = $('#selectPortions').val();
-    
-        let change = + parseFloat((parseFloat(newPeople) / parseFloat(peopleCalc)));
-        peopleCalc = newPeople;
-        $('#ingredientsTable tr').each(function () {
-            $(this).find('#measurementCalc').each(function () {
-                let currentMeasurement = parseFloat($(this).text());
-                let newMeasurement = parseFloat((Math.ceil((currentMeasurement * change) * 2) / 2).toFixed(2));
-                newMeasurement = newMeasurement.toString();
-                $(this).text(newMeasurement.replace((".", ",")));
-            })
-    
-        })
-    })
     
 
 

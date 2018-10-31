@@ -78,24 +78,24 @@ $('#measure-unit').on("change", function () {
 ////////////////////////ADDING INGREDIENTS/////////////////
 $('#add_ingredient').click(function () {
     let name = $('#ingredient-name').val();
-    let unit = $('#NoOfUnits').val();
+    let units = $('#NoOfUnits').val();
     let measuringUnit = $('#measure-unit').val();
     let unitEquivalentInGrams = $('#grams').val();
-    if (name == "" || unit == "" || measuringUnit == "" || unitEquivalentInGrams == "") {
+    if (name == "" || units == "" || measuringUnit == "" || unitEquivalentInGrams == "") {
         alert("Du måste fylla i alla ingrediensfälten!")
     }
     else {
         
         ingredientArray = ingredientArray.concat({
             name: name,
-            unit: unit,
+            units: units,
             measuringUnit: measuringUnit,
             unitEquivalentInGrams: unitEquivalentInGrams,
             gramPerPortion: unitEquivalentInGrams / portions
         });
 
 
-        $('#display-ingredients').append(`<li>${name} ${unit}${measuringUnit} mängd i gram: ${unitEquivalentInGrams}</li>`);
+        $('#display-ingredients').append(`<li>${name} ${units}${measuringUnit} mängd i gram: ${unitEquivalentInGrams}</li>`);
         console.log(ingredientArray, "added");
         emptyIngredient();
     }

@@ -18,7 +18,7 @@
                 "unitEquivalentInGrams": 60
             }
         ],
-        "urlToImg": "/images/beautiful-omelet.jpg"
+        "urlToImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx-sr2jUfqjxWbGQVq6N_9fIVJwdktFUwPHzlfMSlkY-K_sNqQSA"
     },
     {
         "name": "pannkaka",
@@ -61,7 +61,7 @@
                 "unitEquivalentInGrams": 15
             }
         ],
-        "urlToImg": "/images/beautiful-pasta.jpg"
+        "urlToImg": "http://www.thecheapgourmand.com/wp-content/uploads/2011/09/IMG_5375.jpg"
     },
     {
         "name": "Pasta med smör",
@@ -87,24 +87,7 @@
                 "unitEquivalentInGrams": 50
             }
         ],
-        "urlToImg": "/images/beautiful-pasta.jpg"
-    },
-    {
-        "name": "fish n chips",
-        "portions": "4",
-        "category": "middag",
-        "instructions": [
-            "gör såhär"
-        ],
-        "ingredients": [
-            {
-                "name": "Fisk friterad",
-                "unit": "2",
-                "measuringUnit": "st",
-                "unitEquivalentInGrams": "200",
-                "gramPerPortion": 50
-            }
-        ],
-        "urlToImg": "images/fish-and-chips-2.jpg"
+        "urlToImg": "https://i0.wp.com/www.mariasmat.nu/wp-content/uploads/2017/05/Pasta-med-brynt-salviasm%C3%B6r1.jpeg"
     }
+    
 ]

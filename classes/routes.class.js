@@ -134,7 +134,24 @@ this.app.get(
               console.log(recipe);
             } 
           );
-          //------------
+           //---------------
+      //find nutrition
+      //----------------
+    this.app.get(
+      '/ingredients/:ingredient',
+      (req, res) => {
+
+        let ingredients = req.params.ingredient.toLowerCase();
+
+        let ingredientDb = require('../json/livsmedelsdata.json') || [];
+
+        let result = ingredientDb.find((ing) => ing.Namn.toLowerCase().includes(ingredients));
+
+        res.json(result);
+
+      }
+    );
+      //------------
       //post recipe
       //-------------
     this.app.post(
@@ -159,8 +176,10 @@ this.app.get(
       }
       
       );
-        }
-      }
+      
+  }
+}
+
       
 
     
