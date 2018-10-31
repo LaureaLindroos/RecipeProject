@@ -194,20 +194,12 @@ $('#search-result').on('change', '#selectPortions', function () {
             let newMeasurement = parseFloat((Math.ceil((currentMeasurement * change) * 2) / 2).toFixed(2));
             newMeasurement = newMeasurement.toString();
             $(this).text(newMeasurement.replace((".", ",")));
+           
         })
 
     })
 })
-//----------------------
-//Re-evaluate portions
-//---------------------
-$("#selectPortions").click(function (event) {
-    var target = $(event.target);
-    if (target.is("option")) {
-        console.log(target.text())
-        filterCategories(target.text());
-    }
-});
+
 
     //Filter
     //According to category
@@ -250,7 +242,7 @@ $("#selectPortions").click(function (event) {
         )
     }
     function getNutrition(ingredient) {
-        $.get('http://localhost:3000/ingredients/' + ingredients.name, (data) => {
+        $.get('http://localhost:3000/ingredients/' + ingredient.name.replace(/%/g, '_'), (data) => {
     
             nutritionCalculation(data, ingredient);
         });
@@ -260,7 +252,7 @@ $("#selectPortions").click(function (event) {
 
     //Calculations for nutritional data
 
-    function calculationNutrition(nutrition, ingredient) {
+    function nutritionCalculation(nutrition, ingredient) {
         let kolesterol = nutrition.Naringsvarden.Naringsvarde.find(findNutrient("kolesterol"));
         let energi = nutrition.Naringsvarden.Naringsvarde.find(findNutrient("energi"));
         let kolhydrat = nutrition.Naringsvarden.Naringsvarde.find(findNutrient("kolhydrat"));
@@ -273,7 +265,7 @@ $("#selectPortions").click(function (event) {
         let diSac = nutrition.Naringsvarden.Naringsvarde.find(findNutrient("disackarider"));
         let salt = nutrition.Naringsvarden.Naringsvarde.find(findNutrient("salt"));
     
-        let multiplyToGetNutrition = parseFloat((ingredient.unitPerPerson / 100).toFixed(2))
+        let multiplyToGetNutrition = parseFloat((ingredient.gramPerPortion / 100).toFixed(2))
         displayFat(fett.Varde, fettMatt.Varde, fettOmatt.Varde, fettFlero.Varde, multiplyToGetNutrition);
         displaySugar(sackaros.Varde, monoSac.Varde, diSac.Varde, multiplyToGetNutrition);
         displayCarbohydrates(kolhydrat.Varde, multiplyToGetNutrition);
