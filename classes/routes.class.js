@@ -162,12 +162,11 @@ this.app.get(
         
         fs.readFile(jsonFile, function (err, data) {
          var json = JSON.parse(data);
-          console.log(data);
 
           json.push(addJson);
 
           fs.writeFile(jsonFile, JSON.stringify(json, null, 4),"utf8",err => {
-            if(err) {console.log(err)
+            if(err) {
             alert("Ej Tillagt!")};
             res.json({ saved: true });
           })

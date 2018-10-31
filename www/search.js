@@ -210,16 +210,13 @@ $('#search-result').on('change', '#selectPortions', function () {
         }
     });
     function filterCategories(category) {
-        console.log(category);
         $.get('http://localhost:3000/recipes-by-category/' + category, (data) => {
             $('#search-result').empty();
-            console.log(data);
             data.forEach(listRecipes);
         });
     }
     $("#select-category").on("change", function(){
         let category = $("#select-category").val();
-        console.log($("#select-category").val());
         filterCategories(category);
     })
     function getNutritionData(ingredient){
