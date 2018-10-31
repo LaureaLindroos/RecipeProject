@@ -10,7 +10,6 @@
 $(document).keypress( function(e){
     let searchValue = $('#search-value').val();
     if(e.key === "Enter"){
-        console.log("You've pressed the enter key!");
         getRecipes(searchValue);
     }
 })
@@ -105,6 +104,8 @@ $('#search-result').click(function (event) {
 let calculatePortions;
 
 function getRecipeData(name) {
+    $('#nutritionSection').hide();
+    emptyNutrients();
     $.get('http://localhost:3000/recipe-list/' + name, (data) => {
         $('#search-result').empty();
         $('#resultAc').empty();
@@ -114,6 +115,7 @@ function getRecipeData(name) {
 }
 
 function displayRecipeData(data) {
+    $('#nutritionSection').show();
     let display = $('<section></section>');
     display.addClass('display');
     $("#search-result").append(display);
@@ -129,7 +131,7 @@ function displayRecipeData(data) {
 
     calculatePortions = data.portions;
 
-    let portions = $(`<select id="selectPortions">
+    let portions = $(`<h4>Antal Portioner:</h4><select id="selectPortions">
     <option selected value="${data.portions}">${data.portions}</option>
     <option value="1">1</option>
     <option value="2">2</option>
@@ -141,7 +143,7 @@ function displayRecipeData(data) {
     let ingredientTable = $('<table id="ingredientsTable" class="table"></table>');
     let tableHead = $(`<thead>
     <tr>
-      <th scope="col">Namn</th>
+      <th scope="col">Ingredienser</th>
       <th scope="col">Antal</th>
       <th scope="col">Enhet</th>
     </tr>
@@ -162,7 +164,7 @@ function displayRecipeData(data) {
     ingredientTable.append(tableBody);
     display.append(ingredientTable);
 
-    let instructionsOlList = $('<ol></ol>');
+    let instructionsOlList = $('<ol><h4>Instruktioner:</h4></ol>');
     display.append(instructionsOlList);
     data.instructions.forEach((instruction) => {
         let instructionLi = $('<li></li>');
